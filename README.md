@@ -76,7 +76,7 @@ ClearCounsel is a productivity and compliance aid. It does not constitute legal 
 ## Contact
 
 **Email:** hello@clearcounsel.app  
-**Built by:** Built from inside the compliance trenches. 
+**Built for Legal Ops. Legal Tech. Legal Compliance.** 
 **Portfolio:** [itscrissygee.github.io](https://itscrissygee.github.io)
 
 -----
