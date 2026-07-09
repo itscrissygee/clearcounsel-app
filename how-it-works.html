@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How It Works — ClearCounsel</title>
+  <meta name="description" content="Learn how to use ClearCounsel to redact client data and generate court-ready AI disclosure statements." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #070d1a; --navy-mid: #0d1a2e; --navy-light: #132035;
+      --gold: #c4a244; --gold-light: #e8c96a; --gold-pale: #f5e9c0;
+      --text: #ddd6c4; --muted: #6b7280;
+      --border: rgba(196,162,68,0.15); --border-soft: rgba(255,255,255,0.06);
+    }
+    body { background: var(--navy); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.7; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 60px; display: flex; align-items: center; justify-content: space-between; background: rgba(7,13,26,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo { width: 32px; height: 32px; background: linear-gradient(135deg, #c4a244, #e8c96a); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #c4a244, #f0d98a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-back { color: var(--muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--gold); }
+    main { max-width: 760px; margin: 0 auto; padding: 120px 24px 80px; }
+    .page-label { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; line-height: 1.1; margin-bottom: 12px; }
+    .subtitle { font-size: 17px; color: var(--muted); margin-bottom: 56px; font-weight: 300; max-width: 560px; }
+    /* Tool section */
+    .tool-section { margin-bottom: 64px; }
+    .tool-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .tool-icon { width: 48px; height: 48px; background: rgba(196,162,68,0.1); border: 1px solid rgba(196,162,68,0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .tool-title-wrap { flex: 1; }
+    .tool-number { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .tool-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: #e8e0d0; }
+    .tool-rule { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 20px; position: relative; padding-bottom: 32px; }
+    .step:last-child { padding-bottom: 0; }
+    .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .step-number { width: 36px; height: 36px; border-radius: 50%; background: rgba(196,162,68,0.1); border: 1px solid rgba(196,162,68,0.3); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+    .step-line { width: 1px; flex: 1; background: rgba(196,162,68,0.15); margin-top: 8px; min-height: 32px; }
+    .step:last-child .step-line { display: none; }
+    .step-content { flex: 1; padding-top: 6px; }
+    .step-title { font-size: 15px; font-weight: 600; color: #e8e0d0; margin-bottom: 6px; }
+    .step-desc { font-size: 14px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+    /* Tips */
+    .tip-box { background: rgba(196,162,68,0.05); border: 1px solid rgba(196,162,68,0.2); border-left: 3px solid var(--gold); border-radius: 8px; padding: 16px 20px; margin-top: 24px; }
+    .tip-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .tip-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    /* Use case cards */
+    .use-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 48px; margin-bottom: 48px; }
+    .use-case { background: var(--navy-mid); border: 1px solid var(--border-soft); border-radius: 10px; padding: 20px; transition: border-color 0.2s; }
+    .use-case:hover { border-color: var(--border); }
+    .use-case-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+    .use-case-title { font-size: 14px; font-weight: 600; color: #e8e0d0; margin-bottom: 6px; }
+    .use-case-desc { font-size: 13px; color: var(--muted); line-height: 1.55; font-weight: 300; }
+    /* Divider */
+    .divider { height: 1px; background: var(--border-soft); margin: 56px 0; }
+    /* CTA */
+    .cta-section { text-align: center; padding: 40px 0; }
+    .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .cta-section p { color: var(--muted); margin-bottom: 28px; font-weight: 300; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: linear-gradient(135deg, #c4a244, #e8c96a); color: #070d1a; border: none; border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.15s; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; text-decoration: none; margin-left: 10px; transition: all 0.15s; }
+    .btn-secondary:hover { border-color: var(--border); color: var(--gold); }
+    /* Warning */
+    .disclaimer { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.15); border-radius: 8px; padding: 16px 20px; margin-top: 48px; }
+    .disclaimer p { font-size: 13px; color: #9ca3af; line-height: 1.6; }
+    .disclaimer strong { color: #fca5a5; }
+    /* Footer */
+    footer { border-top: 1px solid var(--border-soft); padding: 32px 60px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; background: linear-gradient(135deg, #c4a244, #f0d98a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--gold); }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      h1 { font-size: 36px; }
+      .use-cases { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-brand">
+      <div class="nav-logo">⚖</div>
+      <span class="nav-name">ClearCounsel</span>
+    </a>
+    <a href="/" class="nav-back">← Back to Home</a>
+  </nav>
+
+  <main>
+    <div class="page-label">Guide</div>
+    <h1>How It Works</h1>
+    <p class="subtitle">ClearCounsel has two tools. Use them together before and after any AI-assisted legal work.</p>
+
+    <!-- TOOL 1 -->
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="tool-icon">🛡</div>
+        <div class="tool-title-wrap">
+          <div class="tool-number">Tool 01</div>
+          <div class="tool-name">Redact Before You Paste</div>
+          <div class="tool-rule">ABA Model Rule 1.6 — Confidentiality of Client Information</div>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Open the tool and go to Tab 1</div>
+            <div class="step-desc">Go to <a href="https://tool.clearcounsel.app" target="_blank">tool.clearcounsel.app</a> and make sure you're on the <strong style="color:#e8e0d0;">Redact Before You Paste</strong> tab. No login required.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Choose your detection categories</div>
+            <div class="step-desc">At the top you'll see color-coded toggles for each category ClearCounsel detects — SSNs, email addresses, phone numbers, dates, street addresses, case numbers, and financial account data. All are on by default. Toggle off any you don't need.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Paste your document text</div>
+            <div class="step-desc">Copy the text from your legal document — contract, case notes, client communication, court filing, whatever you're working with — and paste it into the text area. <strong style="color:#e8e0d0;">Your document never leaves your browser.</strong> Everything is processed locally on your device.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">4</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Click Analyze & Detect PII</div>
+            <div class="step-desc">ClearCounsel scans the text and highlights every detected item in a color that matches its category. Red for SSNs, amber for emails, purple for phone numbers, and so on. You'll see exactly what was found and where.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">5</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Review the highlighted view</div>
+            <div class="step-desc">The default view shows your original text with all detected items highlighted. Review it carefully — ClearCounsel uses pattern-matching and may not catch everything, particularly proper names or unusual formatting. Always do a manual check.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">6</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Switch to Redacted Output and copy</div>
+            <div class="step-desc">Click <strong style="color:#e8e0d0;">Redacted Output</strong> to see the clean version. Each detected item is replaced with a labeled tag like [EMAIL_ADDRESSES] or [SOCIAL_SECURITY_NUMBERS]. Click <strong style="color:#e8e0d0;">Copy Redacted Text</strong> and paste it into your AI tool.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-label">💡 Pro tip</div>
+        <div class="tip-text">If you're working with a document that contains a lot of client names or proprietary terms that the tool won't catch, do a manual find-and-replace in your text editor first, then run it through ClearCounsel for the structured PII.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- TOOL 2 -->
+    <div class="tool-section">
+      <div class="tool-header">
+        <div class="tool-icon">📋</div>
+        <div class="tool-title-wrap">
+          <div class="tool-number">Tool 02</div>
+          <div class="tool-name">Disclose After You File</div>
+          <div class="tool-rule">ABA Model Rule 3.3 — Candor Toward the Tribunal</div>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Go to Tab 2 — Disclose After You File</div>
+            <div class="step-desc">Click the <strong style="color:#e8e0d0;">Disclose After You File</strong> tab at the top of the tool. Use this any time AI was used to help draft, research, or review content that will be submitted to a court.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Select your court information</div>
+            <div class="step-desc">Choose your court type from the dropdown — U.S. District Court, State Trial Court, Bankruptcy Court, and more. Then select your state or jurisdiction. Optionally enter the specific court name for more precise language.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Select your filing type</div>
+            <div class="step-desc">Choose the type of document you're filing — Motion, Brief, Complaint, Response, Discovery Requests, Expert Declaration, and more. This helps ClearCounsel generate language appropriate to the document.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">4</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Select the AI tools you used</div>
+            <div class="step-desc">Check every AI tool that was used in drafting or researching the filing — ChatGPT, Claude, Westlaw AI, Lexis+ AI, Microsoft Copilot, Harvey, CoCounsel, Gemini, Paxton AI, Perplexity, or Other. You can select multiple.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">5</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Confirm attorney review</div>
+            <div class="step-desc">Toggle on <strong style="color:#e8e0d0;">Attorney Human Review</strong> to confirm that supervising counsel independently reviewed and verified all AI-generated content. This is included in the generated disclosure language.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-left">
+            <div class="step-number">6</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <div class="step-title">Generate your disclosure</div>
+            <div class="step-desc">Click <strong style="color:#e8e0d0;">Generate Disclosure Statement</strong>. ClearCounsel produces court-appropriate disclosure language in seconds. Review it, click <strong style="color:#e8e0d0;">Copy Disclosure</strong>, and paste it directly into your filing. If you want different phrasing, click <strong style="color:#e8e0d0;">Regenerate</strong>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-label">💡 Pro tip</div>
+        <div class="tip-text">Always have the supervising attorney review the generated disclosure before it goes into any filing. Requirements vary by judge and court — check any applicable standing orders for your specific courtroom. When in doubt, disclose more rather than less.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WHO IT'S FOR -->
+    <div class="page-label">Who uses ClearCounsel</div>
+    <div style="margin-top: 20px; margin-bottom: 48px;">
+      <div class="use-cases">
+        <div class="use-case">
+          <span class="use-case-icon">👩‍💼</span>
+          <div class="use-case-title">Paralegals & Legal Assistants</div>
+          <div class="use-case-desc">Run every document through Tab 1 before pasting into any AI tool. Makes client data protection a consistent part of your prep workflow.</div>
+        </div>
+        <div class="use-case">
+          <span class="use-case-icon">⚖️</span>
+          <div class="use-case-title">Attorneys & Solo Practitioners</div>
+          <div class="use-case-desc">Use Tab 2 after any AI-assisted drafting. Generate the disclosure your court requires before every filing that involved AI.</div>
+        </div>
+        <div class="use-case">
+          <span class="use-case-icon">🏛️</span>
+          <div class="use-case-title">Legal Ops & Firm Admins</div>
+          <div class="use-case-desc">Share both tools with your team as the firm's documented AI compliance workflow. Point to ClearCounsel in your AI policy.</div>
+        </div>
+        <div class="use-case">
+          <span class="use-case-icon">🎓</span>
+          <div class="use-case-title">Law Students & Legal Studies</div>
+          <div class="use-case-desc">Learn responsible AI use before entering practice. ClearCounsel teaches the Rules by making compliance a hands-on habit.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer">
+      <p><strong>Important:</strong> ClearCounsel is a productivity and compliance aid — it does not constitute legal advice. The PII redaction tool uses pattern-matching heuristics and may not detect every instance of sensitive information. Always conduct a manual review before sharing any document with an AI tool. Generated disclosure language must be reviewed by the supervising attorney before inclusion in any court filing. Requirements vary by court, judge, and jurisdiction.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2>Ready to try it?</h2>
+      <p>Free to use. No login required. Works in your browser.</p>
+      <a href="https://tool.clearcounsel.app" target="_blank" class="btn-primary">✦ Open the Tool</a>
+      <a href="/faq" class="btn-secondary">Read the FAQ →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div>
+      <div class="footer-brand">⚖ ClearCounsel</div>
+      <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">Built for legal ops. Legal tech. Legal compliance.</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/how-it-works">How It Works</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/terms">Terms</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="mailto:hello@clearcounsel.app">Contact</a></li>
+    </ul>
+    <div style="font-size: 12px; color: var(--muted);">© 2026 ClearCounsel · clearcounsel.app</div>
+  </footer>
+
+</body>
+</html>
